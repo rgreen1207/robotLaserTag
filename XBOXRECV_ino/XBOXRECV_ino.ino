@@ -5,6 +5,7 @@
  send me an e-mail:  kristianl@tkjelectronics.com
  */
 
+#include <Servo.h>
 #include <XBOXRECV.h>
 // Satisfy IDE, which only needs to see the include statment in the ino.
 #ifdef dobogusinclude
@@ -13,6 +14,7 @@
 
 USB Usb;
 XBOXRECV Xbox(&Usb);
+Servo myservo;
 
 void setup() {
   Serial.begin(115200);
@@ -22,6 +24,7 @@ void setup() {
     while (1); //halt
   }
   Serial.print(F("\r\nXbox Wireless Receiver Library Started"));
+  myservo.attach(13);
 }
 void loop() {
   Usb.Task();
@@ -34,6 +37,7 @@ void loop() {
           Serial.print("\tR2: ");
           Serial.println(Xbox.getButtonPress(R2, i));
           Xbox.setRumbleOn(Xbox.getButtonPress(L2, i), Xbox.getButtonPress(R2, i), i);
+          
         }
 
         if (Xbox.getAnalogHat(LeftHatX, i) > 7500 || Xbox.getAnalogHat(LeftHatX, i) < -7500 || Xbox.getAnalogHat(LeftHatY, i) > 7500 || Xbox.getAnalogHat(LeftHatY, i) < -7500 || Xbox.getAnalogHat(RightHatX, i) > 7500 || Xbox.getAnalogHat(RightHatX, i) < -7500 || Xbox.getAnalogHat(RightHatY, i) > 7500 || Xbox.getAnalogHat(RightHatY, i) < -7500) {
@@ -46,6 +50,8 @@ void loop() {
             Serial.print(F("LeftHatY: "));
             Serial.print(Xbox.getAnalogHat(LeftHatY, i));
             Serial.print("\t");
+            myservo.write(Xbox.getAnalogHat(LeftHatY, i)/180);              // tell servo to go to position in variable 'pos' 
+            delay(15);
           }
           if (Xbox.getAnalogHat(RightHatX, i) > 7500 || Xbox.getAnalogHat(RightHatX, i) < -7500) {
             Serial.print(F("RightHatX: "));
@@ -93,6 +99,7 @@ void loop() {
           Serial.println(F("L1"));
         if (Xbox.getButtonClick(R1, i))
           Serial.println(F("R1"));
+          
         if (Xbox.getButtonClick(XBOX, i)) {
           Xbox.setLedMode(ROTATING, i);
           Serial.print(F("Xbox (Battery: "));
