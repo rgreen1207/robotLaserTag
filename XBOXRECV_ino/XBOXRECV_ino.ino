@@ -5,7 +5,7 @@
  send me an e-mail:  kristianl@tkjelectronics.com
  */
 
-#include <XBOXRECV.h>
+#include "C:\Users\Javar Alexander\Documents\Arduino\libraries\USB_Host_Shield_20\XBOXRECV.h"
 // Satisfy IDE, which only needs to see the include statment in the ino.
 #ifdef dobogusinclude
 #include <spi4teensy3.h>
