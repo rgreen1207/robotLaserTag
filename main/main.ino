@@ -6,15 +6,17 @@
  */
 
 #include <Servo.h>
+#include <iostream>
+using namespace std;
 #include <XBOXRECV.h>
-// Satisfy IDE, which only needs to see the include statment in the ino.
 #ifdef dobogusinclude
 #include <spi4teensy3.h>
 #endif
 
 USB Usb;
 XBOXRECV Xbox(&Usb);
-
+int health = 100;
+int shots_damage = 10;
 void setup() {
   Serial.begin(115200);
   while (!Serial); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
@@ -114,6 +116,16 @@ void loop() {
         if (Xbox.getButtonClick(Y, i))
           Serial.println(F("Y"));
       }
-    }
+
+	 for (int j =0; j<health; j++)
+		{
+		if (Xbox.getButtonClick(L1, i))
+			{
+			(health = (health -  shots_damage)); 
+			}
+		}
+		 
+	
+	}
   }
 }
