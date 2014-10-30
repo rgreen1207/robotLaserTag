@@ -119,7 +119,7 @@ void loop() {
 
 	 for (int j =0; j<health; j++)
 		{
-		if (Xbox.getButtonClick(L1, i))
+		if (Xbox.getButtonClick(L1, i)) // condition needed for when buttonisclicked?
 			{
 			(health = (health -  shots_damage)); 
 			}
