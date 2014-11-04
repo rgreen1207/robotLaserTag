@@ -1,8 +1,17 @@
 /*
- Example sketch for the Xbox Wireless Reciver library - developed by Kristian Lauszus
- It supports up to four controllers wirelessly
- For more information see the blog post: http://blog.tkjelectronics.dk/2012/12/xbox-360-receiver-added-to-the-usb-host-library/ or
- send me an e-mail:  kristianl@tkjelectronics.com
+  Title:           Robot Laser Tag
+  Abstract:        User controls a Boe-Bot with an Xbox 360 controller in a game of laser tag with another Boe-Bot. This sketch includes
+                   all game logic, I/O subsystems, and supports up to four controllers wirelessly (but only two are used to play).
+  Author(s):       Javar Alexander (jaalexander@csumb.edu)
+                   Ryan Green      (rgreen@csumb.edu)
+                   Greg Greenleaf  (ggreenleaf@csumb.edu)
+                   Tyler Nicholson (tnicholson@csumb.edu)
+  Initial release: December 15, 2014
+
+  Sketch contributions for the Xbox Wireless Reciver library was developed by Kristian Lauszus. For more information see the blog post: 
+  http://blog.tkjelectronics.dk/2012/12/xbox-360-receiver-added-to-the-usb-host-library/
+ 
+  This project can be found on GitHub: https://github.com/pacohojaverde/robotLaserTag
  */
 
 #include <Servo.h>
@@ -15,6 +24,7 @@
 USB Usb;
 XBOXRECV Xbox(&Usb);
 
+// This section executes once
 void setup() {
   Serial.begin(115200);
   while (!Serial); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
@@ -24,6 +34,8 @@ void setup() {
   }
   Serial.print(F("\r\nXbox Wireless Receiver Library Started"));
 }
+
+// This section executes continuously
 void loop() {
   Usb.Task();
   if (Xbox.XboxReceiverConnected) {
