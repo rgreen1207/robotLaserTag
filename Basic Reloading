@@ -1,0 +1,24 @@
+#include <iostream>
+#include <time.h>
+#include "xbox.h"
+
+bool Wait(int seconds)
+{
+	clock_t endwait;
+	endwait = clock() + seconds*CLK_TCK;
+	while (clock() < endwait){}
+	if (seconds < 3)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int main()
+{
+	Wait(Xbox.getButtonClick(X, i));
+	system("pause");
+}
